@@ -10,7 +10,7 @@
 
 <script>
 // @ is an alias to /src
-import ScreenView from '@/components/ScreenView.vue'
+import ScreenView from '@/components/screen/ScreenView.vue'
 import TimerBar from '@/components/TimerBar.vue'
 import SearchBar from '@/components/SearchBar.vue'
 import HitokotoBar from '@/components/HitokotoBar.vue'

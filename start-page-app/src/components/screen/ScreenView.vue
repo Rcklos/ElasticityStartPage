@@ -2,21 +2,24 @@
   <div class="screen-container">
     <div class="screen-box" :class="showClassName">
       <h3>{{ title }}</h3>
+      <div class="child-box">
+        <WeekScreen />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import WeekScreen from './components/WeekScreen.vue'
+
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '标题'
-    }
+ components: {
+    WeekScreen
   },
   data(){
     return {
-      showClassName: 'hide'
+      showClassName: 'hide',
+      title: '本周日程'
     }
   },
   methods: {
@@ -85,6 +88,10 @@ export default {
       background-color: #DFDFDF;
       font-weight: normal;
       border-bottom: 1px solid #CFCFCF;
+    }
+    
+    .child-box {
+      height: calc(100% - 1.4rem - 35px);
     }
   }
 }
