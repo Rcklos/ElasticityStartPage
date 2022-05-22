@@ -2,12 +2,14 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld :msg="hitokoto"/>
+    <ScreenView />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
+import ScreenView from '@/components/ScreenView.vue'
 import api from '@/api'
 
 export default {
@@ -18,7 +20,8 @@ export default {
     }
   },
   components: {
-    HelloWorld
+    HelloWorld,
+    ScreenView
   },
   mounted(){
     const that = this
