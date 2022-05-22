@@ -48,7 +48,7 @@ export default {
   &-text {
     text-align: center;
   }
-  &-from:before {
+  &-from::before {
     content: "——"
   }
   &-from {
