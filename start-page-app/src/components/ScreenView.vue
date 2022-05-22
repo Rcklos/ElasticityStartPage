@@ -1,12 +1,19 @@
 <template>
-  <div class="screen-container" @click="toggle">
+  <div class="screen-container">
     <div class="screen-box" :class="showClassName">
+      <h3>{{ title }}</h3>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    title: {
+      type: String,
+      default: '标题'
+    }
+  },
   data(){
     return {
       showClassName: 'hide'
@@ -24,6 +31,7 @@ export default {
       }
       else
         this.showClassName = 'hide'
+      return true
     },
 
     addTrasitionEndEvent() {
@@ -31,7 +39,6 @@ export default {
       const screenBox = document.getElementsByClassName('screen-box')[0]
 
       screenBox.addEventListener('transitionend', () => {
-        console.log('transitionend')
         if(that.showClassName === 'hide')
           screenBox.style.setProperty('display', 'none', 'important')
       }, false)
@@ -46,6 +53,7 @@ export default {
 <style lang="scss">
 .show {
   transform: rotate(0);
+  pointer-events: fill;
 }
 .hide {
   transform: rotateY(90deg);
@@ -60,13 +68,24 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
   .screen-box {
-    width: 75%;
+    width: 1200px;
     height: 80%;
-    background-color: #B5B5B5;
-    border-radius: 10px;
+    background-color: #EFEFEF;
+    border-radius: 27px 27px 10px 10px;
+    overflow: hidden;
     /* 效果 */
-    transition: all .6s ease-in-out;
+    transition: all .3s ease-in-out;
+
+    h3 {
+      margin: 0;
+      padding: 17px 0;
+      line-height: 1.4rem;
+      background-color: #DFDFDF;
+      font-weight: normal;
+      border-bottom: 1px solid #CFCFCF;
+    }
   }
 }
 </style>

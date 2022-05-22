@@ -2,6 +2,16 @@
  <router-view/>
 </template>
 
+<script>
+export default {
+  mounted(){
+    document.oncontextmenu = () => {
+      return false
+    }
+  }
+}
+</script>
+
 <style lang="scss">
 *, html, body {
   margin: 0;
