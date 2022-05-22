@@ -3,40 +3,24 @@
     <div class="home-background"></div>
     <TimerBar />
     <SearchBar />
-    <HelloWorld :msg="hitokoto"/>
-    <ScreenView />
+    <HitokotoBar />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 /*import ScreenView from '@/components/ScreenView.vue'*/
 import TimerBar from '@/components/TimerBar.vue'
 import SearchBar from '@/components/SearchBar.vue'
-import api from '@/api'
+import HitokotoBar from '@/components/HitokotoBar.vue'
 
 export default {
   name: 'HomeView',
-  data(){
-    return {
-      hitokoto: '',
-    }
-  },
   components: {
-    HelloWorld,
     /*ScreenView,*/
     TimerBar,
-    SearchBar
-  },
-  mounted(){
-    const that = this
-    api.hitokoto.get()
-      .then(res => {
-        that.hitokoto = res.data.hitokoto
-        console.log(res.data)
-      })
-      .catch(err => console.error(err))
+    SearchBar,
+    HitokotoBar
   }
 }
 </script>
