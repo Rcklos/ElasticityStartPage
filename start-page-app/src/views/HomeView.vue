@@ -2,6 +2,7 @@
   <div class="home">
     <div class="home-background"></div>
     <TimerBar />
+    <SearchBar />
     <HelloWorld :msg="hitokoto"/>
     <ScreenView />
   </div>
@@ -10,8 +11,9 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
-import ScreenView from '@/components/ScreenView.vue'
+/*import ScreenView from '@/components/ScreenView.vue'*/
 import TimerBar from '@/components/TimerBar.vue'
+import SearchBar from '@/components/SearchBar.vue'
 import api from '@/api'
 
 export default {
@@ -23,8 +25,9 @@ export default {
   },
   components: {
     HelloWorld,
-    ScreenView,
-    TimerBar
+    /*ScreenView,*/
+    TimerBar,
+    SearchBar
   },
   mounted(){
     const that = this

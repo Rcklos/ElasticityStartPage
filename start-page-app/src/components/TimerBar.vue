@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .timer-bar-container {
   padding-top: 127px;
-  padding-bottom: 67px;
+  padding-bottom: 37px;
   p {
     font-size: 3rem;
     color: white;
