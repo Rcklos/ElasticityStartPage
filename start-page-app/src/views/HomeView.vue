@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <div class="home-background"></div>
+    <TimerBar />
     <HelloWorld :msg="hitokoto"/>
     <ScreenView />
   </div>
@@ -10,6 +11,7 @@
 // @ is an alias to /src
 import HelloWorld from '@/components/HelloWorld.vue'
 import ScreenView from '@/components/ScreenView.vue'
+import TimerBar from '@/components/TimerBar.vue'
 import api from '@/api'
 
 export default {
@@ -21,7 +23,8 @@ export default {
   },
   components: {
     HelloWorld,
-    ScreenView
+    ScreenView,
+    TimerBar
   },
   mounted(){
     const that = this
@@ -34,3 +37,18 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.home {
+  &-background {
+    background-image: url(https://cn.bing.com/th?id=OHR.GlassBridge_ZH-CN4258621683_1920x1080.jpg&rf=LaDigue_1920x1080.jpg);
+    filter: brightness(70%);
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+  }
+}
+</style>
