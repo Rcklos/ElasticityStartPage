@@ -1,7 +1,5 @@
-//import { getDateString, getTimeFormate } from '@/utils/date.js'
-
 const week = {
-  '2022-5-22': [
+  '2022-05-22': [
     {
       start: 1653220800000,
       title: '恰饭',
@@ -13,7 +11,7 @@ const week = {
       duration: 30 * 60 * 1000
     }
   ],
-  '2022-5-24': [
+  '2022-05-24': [
     {
       start: 1653364800000,
       title: '正午了喔',

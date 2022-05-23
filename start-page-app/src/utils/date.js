@@ -1,22 +1,26 @@
-export function getDateString(targetDay = 0, format = 'Y-M-d') {
+export function getDateStringOfDay(targetDay = 0, format = 'Y-MM-dd') {
   const now = new Date()
   const year = now.getFullYear()
   const month = now.getMonth()
-  const day = now.getDate()
-  const today = new Date(year, month, day)
+  const date = now.getDate()
+  const day = now.getDay()
+  const diffDay = parseInt(targetDay, 10) - parseInt(day, 10)
+  const today = new Date(year, month, date)
   const targetDate = new Date(today.getTime() 
-    + (targetDay * 24 * 60 * 60 * 1000))
+    + (diffDay * 24 * 60 * 60 * 1000))
   return new Date(targetDate).pattern(format)
 }
 
-export function getZeroDateByOffset(offset) {
+export function getZeroDateOfDay(targetDay = 0) {
   const now = new Date()
   const year = now.getFullYear()
   const month = now.getMonth()
-  const day = now.getDate()
-  const nowZeroDate = new Date(year, month, day)
+  const date = now.getDate()
+  const day = now.getDay()
+  const diffDay = parseInt(targetDay, 10) - parseInt(day, 10)
+  const nowZeroDate = new Date(year, month, date)
   const targetDate = new Date(nowZeroDate.getTime() +
-    offset * 24 * 60 * 60 *1000)
+    diffDay * 24 * 60 * 60 *1000)
   return targetDate
 }
 

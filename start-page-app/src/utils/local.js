@@ -1,6 +1,6 @@
 const local = {
   set(key = '', value = '') {
-    console.log(JSON.stringify(value))
+    //console.log(JSON.stringify(value))
     localStorage.setItem(key, JSON.stringify(value))
   },
 

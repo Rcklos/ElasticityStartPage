@@ -1,9 +1,18 @@
 import randomColor from 'randomcolor'
-import { weekJson } from '@/res'
-//const weekJson = {}
+//import { weekJson as templateWeekJson } from '@/res'
+import local from '@/utils/local.js'
+import { getDateStringOfDay } from '@/utils/date.js'
+import { getRandomCode } from '@/utils/common.js'
+
+let weekJson = local.get('weekJson') || {}
+//let weekJson = templateWeekJson
 
 export function queryItemList(dayString) {
   return weekJson[dayString]
+}
+
+export function notifyUpdateItemList() {
+  weekJson = local.get('weekJson') || {}
 }
 
 const compareFun = (a, b) => {
@@ -41,6 +50,8 @@ function generateBlank(
   height = 0,       // 渲染高度(0 ~ 1)
   color = 'black',  // 字体颜色
   backgroundColor = 'white', // 背景颜色
+  index = 0,        // 待办索引, 用于检索
+  uniqueKey = getRandomCode()
 ) {
     return {
       title,
@@ -49,7 +60,9 @@ function generateBlank(
       position,
       height,
       color,
-      backgroundColor
+      backgroundColor,
+      index,
+      uniqueKey
     }
 }
 
@@ -67,8 +80,8 @@ export function parseItemList(dayItems, zeroDate) {
   // 插入第一天白板
   const zeroHeight = (dayItems[0].start - zeroDate.getTime()) 
     / SIZE_OF_WHOLE_DAY
-  console.log(zeroDate.getTime())
-  console.log(dayItems[0])
+  //console.log(zeroDate.getTime())
+  //console.log(dayItems[0])
   dayItemList.push(generateBlank('', '', 0, 0, zeroHeight))
 
   // 插入待办
@@ -109,4 +122,11 @@ export function parseItemList(dayItems, zeroDate) {
   }
 
   return dayItemList
+}
+
+export function removeItemOfDay(index, day) {
+  const dateString = getDateStringOfDay(day)
+  const items = weekJson[dateString]
+  items.splice(index, 1)
+  local.set('weekJson', weekJson)
 }

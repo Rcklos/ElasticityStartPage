@@ -16,6 +16,7 @@ module.exports = defineConfig({
         resolvers: [
           // 自动导入element组件
           ElementPlusResolver(),
+        ]
       }),
 
       Components({

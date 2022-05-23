@@ -11,12 +11,12 @@
     <div class="unit-day-box">
       <template v-for="day in weekItemList" :key="day.key">
         <div class="unit-day">
-          <template v-for="item in day.dayItemList" :key="item.height">
-            <div class="day-item" 
+          <template v-for="item in day.dayItemList" :key="item.uniqueKey">
+            <div class="day-item" @click="handleDayItemClick(day.key, item)" 
               :style="{ top: 'calc(' + item.position * 100 + '%)', 
                 height: 'calc(' + item.height * 100 + '%)',
                 backgroundColor: item.backgroundColor, color: item.color }">
-              <h4>
+              <h4 v-if="item.height >= 0.0208 "> <!-- 小于三十分钟不预览 -->
                 <span>{{ item.startTime }} </span>
                 {{ item.title }}
                 <span v-if="item.duration">
@@ -28,20 +28,40 @@
         </div>
       </template>
     </div>
+    <el-dialog 
+      v-model="dialogVisible"
+      title="事件预览"
+      width="30%">
+        <h4> <!-- 小于三十分钟不预览 -->
+          <span>{{ previewItem.startTime }} </span>
+            {{ previewItem.title }}
+          <span v-if="previewItem.duration">
+            {{ '(' + previewItem.duration + 'min)' }}
+          </span>
+        </h4>
+        <div style="display: flex; justify-content: right; margin-top: 37px;">
+          <el-button @click="handleRemoveItemClick" type="danger">删除</el-button>
+        </div>
+    </el-dialog>
   </div>
 </template>
+
 <script>
-import { getDateString, getZeroDateByOffset } from '@/utils/date.js'
-import { queryItemList, parseItemList } from '../utils/week.js'
+import { getDateStringOfDay, getZeroDateOfDay } from '@/utils/date.js'
+import { notifyUpdateItemList, queryItemList,
+         parseItemList, removeItemOfDay } from '../utils/week.js'
 
 export default{
   data(){
     return {
+      dialogVisible: false,
       weekday: [
         '周日', '周一', '周二', '周三', '周四', '周五', '周六'
       ],
       dayOffset: 0,
-      weekItemList: []
+      weekItemList: [],
+      previewDay: 0,
+      previewItem: {}
     }
   },
   computed: {
@@ -50,18 +70,35 @@ export default{
     }
   },
   methods: {
+    handleDayItemClick(day, item) {
+      if(item.duration) {
+        this.previewItem = item
+        this.previewDay = day
+        this.dialogVisible = true
+      }
+      else {
+        this.$emit('notifyAddItem', day)
+      }
+    },
+    handleRemoveItemClick() {
+      removeItemOfDay(this.previewItem.index, this.previewDay)
+      this.dialogVisible = false
+      this.refreshItems()
+    },
     refreshItems() {
       const that = this
+      notifyUpdateItemList()
+      this.weekItemList = []
       // 获取今天星期几, 即相对周日的偏差
       const dayOffset = that.nowDate.getDay()
       that.dayOffset = dayOffset
       // 遍历本周读取指定一天的所有日程 
       for(let i = 0; i < 7; i++){
         // 获取当天全部日程
-        const dayString = getDateString(i - dayOffset)
+        const dateString = getDateStringOfDay(i)
         // 当天零点
-        const zeroDate = getZeroDateByOffset(i - dayOffset)
-        const dayItems = queryItemList(dayString)
+        const zeroDate = getZeroDateOfDay(i)
+        const dayItems = queryItemList(dateString)
         // 将日程转换成渲染数据列表
         const dayItemList = parseItemList(dayItems, zeroDate)
         // 缓存日程, 用于渲染
@@ -70,7 +107,7 @@ export default{
           dayItemList: dayItemList
         })
       }
-      console.log(that.weekItemList)
+      /*console.log(that.weekItemList)*/
     },
   },
   mounted() {
