@@ -32,14 +32,16 @@
 import { ref, reactive, onMounted, defineExpose } from 'vue'
 import WeekScreen from './components/WeekScreen.vue'
 
+const screenIndex = ref(0)
 const showClassName = ref('hide')
-/*const screenBox = ref(0)*/
+const screenBox = ref(null)
 const titles = reactive(['本周日程'])
 
 const toggle = () => {
   if( showClassName.value === 'hide' ){
-    const screenBox = document.getElementsByClassName('screen-box')[0]
-    screenBox.style.setProperty('display', 'block', 'important')
+    /*const screenBox = document.getElementsByClassName('screen-box')[0]*/
+    screenBox.value
+      .style.setProperty('display', 'block', 'important')
     setTimeout(() => {
       showClassName.value = 'show'
     }, 100);
@@ -49,10 +51,11 @@ const toggle = () => {
 }
 
 const addTransitionEndEvent = () => {
-  const screenBox = document.getElementsByClassName('screen-box')[0]
-  screenBox.addEventListener('transitionend', () => {
+  /*const screenBox = document.getElementsByClassName('screen-box')[0]*/
+  screenBox.value.addEventListener('transitionend', () => {
     if(showClassName.value === 'hide')
-      screenBox.style.setProperty('display', 'none', 'important')
+      screenBox.value
+        .style.setProperty('display', 'none', 'important')
   }, false)
 }
 
