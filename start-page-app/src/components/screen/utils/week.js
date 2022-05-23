@@ -1,7 +1,6 @@
-import resJson from '@/res'
 import randomColor from 'randomcolor'
-
-const weekJson = resJson.weekJson
+import { weekJson } from '@/res'
+//const weekJson = {}
 
 export function queryItemList(dayString) {
   return weekJson[dayString]

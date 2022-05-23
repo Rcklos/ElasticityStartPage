@@ -32,11 +32,7 @@
 </template>
 <script>
 import { getDateString, getZeroDateByOffset } from '@/utils/date.js'
-
 import { queryItemList, parseItemList } from '../utils/week.js'
-import resJson from '@/res'
-
-const weekJson = resJson.weekJson
 
 export default{
   data(){
@@ -54,11 +50,6 @@ export default{
     }
   },
   methods: {
-    getItemsByDayIndex(index) {
-      // 获取当天的所有日程
-      const items = weekJson[getDateString(index)]
-      console.log(items)
-    },
     refreshItems() {
       const that = this
       // 获取今天星期几, 即相对周日的偏差
@@ -134,10 +125,15 @@ export default{
         display: flex;
         flex-direction: column;
         justify-content: center;
+        cursor: pointer;
         h4 {
           font-weight: normal;
           font-size: 0.25rem;
         }
+      }
+
+      .day-item:hover {
+        filter: brightness(95%)
       }
     }
     .unit-day:nth-child(1) {
