@@ -42,6 +42,7 @@ export default ({
     },
     define: define,
     server: {
+      port: 6789,
       // 代理
       proxy,
     },
