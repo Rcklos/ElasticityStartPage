@@ -1,7 +1,26 @@
 <template>
   <div class="screen-container">
-    <div class="screen-box" :class="showClassName">
-      <h3>{{ title }}</h3>
+    <div class="screen-box" ref="screenBox" :class="showClassName">
+      <div class="screen-box-header">
+        <h3>{{ titles[screenIndex] }}</h3>
+        <div class="screen-box-header-buttons">
+          <div>
+            <el-button type="primary" circle >
+              <ep-edit style="width: 1rem;" />
+            </el-button>
+          </div>
+          <div>
+            <el-button type="primary" circle >
+              <ep-search style="width: 1rem;" />
+            </el-button>
+          </div>
+          <div>
+            <el-button type="primary" circle >
+              <ep-checked style="width: 1rem;" />
+            </el-button>
+          </div>
+        </div>
+      </div>
       <div class="child-box">
         <WeekScreen />
       </div>
@@ -9,48 +28,41 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { ref, reactive, onMounted, defineExpose } from 'vue'
 import WeekScreen from './components/WeekScreen.vue'
 
-export default {
- components: {
-    WeekScreen
-  },
-  data(){
-    return {
-      showClassName: 'hide',
-      title: '本周日程'
-    }
-  },
-  methods: {
-    toggle() {
-      const that = this
-      if(this.showClassName === 'hide') {
-        const screenBox = document.getElementsByClassName('screen-box')[0]
-        screenBox.style.setProperty('display', 'block', 'important')
-        setTimeout(() => {
-          that.showClassName = 'show'
-        }, 100);
-      }
-      else
-        this.showClassName = 'hide'
-      return true
-    },
+const showClassName = ref('hide')
+/*const screenBox = ref(0)*/
+const titles = reactive(['本周日程'])
 
-    addTrasitionEndEvent() {
-      const that = this
-      const screenBox = document.getElementsByClassName('screen-box')[0]
-
-      screenBox.addEventListener('transitionend', () => {
-        if(that.showClassName === 'hide')
-          screenBox.style.setProperty('display', 'none', 'important')
-      }, false)
-    }
-  },
-  mounted() {
-    this.addTrasitionEndEvent()
+const toggle = () => {
+  if( showClassName.value === 'hide' ){
+    const screenBox = document.getElementsByClassName('screen-box')[0]
+    screenBox.style.setProperty('display', 'block', 'important')
+    setTimeout(() => {
+      showClassName.value = 'show'
+    }, 100);
   }
+  else
+    showClassName.value = 'hide'
 }
+
+const addTransitionEndEvent = () => {
+  const screenBox = document.getElementsByClassName('screen-box')[0]
+  screenBox.addEventListener('transitionend', () => {
+    if(showClassName.value === 'hide')
+      screenBox.style.setProperty('display', 'none', 'important')
+  }, false)
+}
+
+onMounted(() => {
+  addTransitionEndEvent()
+})
+
+defineExpose({
+  toggle
+})
 </script>
 
 <style lang="scss">
@@ -81,13 +93,30 @@ export default {
     /* 效果 */
     transition: all .3s ease-in-out;
 
-    h3 {
+    &-header{
+      position: relative;
       margin: 0;
       padding: 17px 0;
-      line-height: 1.4rem;
       background-color: #DFDFDF;
-      font-weight: normal;
       border-bottom: 1px solid #CFCFCF;
+
+      h3 {
+        font-weight: normal;
+        line-height: 1.4rem;
+      }
+
+      &-buttons {
+        position: absolute;
+        right: 10px;
+        top: 0;
+        height: 100%;
+        display: flex;
+        align-items: center;
+
+        div {
+          margin-right: 7px;
+        }
+      }
     }
     
     .child-box {

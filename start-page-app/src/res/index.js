@@ -22,6 +22,4 @@ const week = {
   ]
 }
 
-export default {
-  weekJson: week
-}
+export const weekJson = week
