@@ -6,6 +6,7 @@ const Icons = require('unplugin-icons/webpack')
 const IconsResolver = require('unplugin-icons/resolver')
 
 module.exports = defineConfig({
+  publicPath: process.env.NODE_ENV === 'production'? "./" : "/",
   transpileDependencies: true,
   devServer: {
     port: 6789
