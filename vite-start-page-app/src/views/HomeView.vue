@@ -56,6 +56,7 @@ onMounted(() => {
     height: 100vh;
     z-index: -1;
     background-color: #323232;
+    background-size: cover;
   }
 }
 </style>
