@@ -7,7 +7,7 @@ const apis = {
     url: '/',
     method: 'get',
     params: {
-      c: 'd'
+      c: 'i'
     }
   }
 }
