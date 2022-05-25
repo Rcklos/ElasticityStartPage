@@ -95,7 +95,8 @@ export function parseItemList(dayItems, zeroDate) {
       (item.start - zeroDate.getTime()) / SIZE_OF_WHOLE_DAY,
       item.duration / SIZE_OF_WHOLE_DAY,
       colors.fontColor,
-      colors.backgroundColor
+      colors.backgroundColor,
+      i
     ))
     
     // 插入白板
@@ -127,6 +128,7 @@ export function parseItemList(dayItems, zeroDate) {
 export function removeItemOfDay(index, day) {
   const dateString = getDateStringOfDay(day)
   const items = weekJson[dateString]
+  //console.log('删除 -------------> ' + index)
   items.splice(index, 1)
   local.set('weekJson', weekJson)
 }
