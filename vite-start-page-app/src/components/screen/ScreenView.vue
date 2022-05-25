@@ -5,13 +5,14 @@
         <h3>{{ titles[screenIndex] }}</h3>
         <div class="screen-box-header-buttons">
           <div>
-            <el-button 
+            <el-button @click="tempClick"
               type="primary" circle >
               <ep-edit style="width: 1rem;" />
             </el-button>
           </div>
           <div>
-            <el-button type="primary" circle >
+            <el-button @click="tempClick"
+              type="primary" circle >
               <ep-checked style="width: 1rem;" />
             </el-button>
           </div>
@@ -21,7 +22,7 @@
         <WeekScreen ref="weekScreen" @notifyAddItem="notifyAddItem"/>
       </div>
     </div>
-    
+
   </div>
   <el-drawer
     ref="drawerRef"
@@ -201,6 +202,11 @@ const handleAddItem = () => {
   local.set('weekJson', cacheWeekJson)
   weekScreen.value.refreshItems()
   drawer.value = false
+}
+
+// 功能还没做好
+const tempClick = () => {
+  ElMessage('功能还没做好!!!')
 }
 
 onMounted(() => {
