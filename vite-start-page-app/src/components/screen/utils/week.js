@@ -71,7 +71,7 @@ const FMT_START_TIME = 'HH:mm'
 export function parseItemList(dayItems, zeroDate) {
   // 如果当天日程为空则返回
   if(dayItems === undefined || dayItems.length === 0) {
-    return [generateBlank( '好闲的一天', '', 0, 0, 1, 'black', 'white')]
+    return [generateBlank( '', '', 0, 0, 1, 'black', 'white')]
   }
 
   // 按时间顺序排序
@@ -104,7 +104,7 @@ export function parseItemList(dayItems, zeroDate) {
       const leftTime = zeroDate.getTime() + SIZE_OF_WHOLE_DAY 
         - (item.start + item.duration)
       dayItemList.push(generateBlank(
-        '没事情做要赶紧休息哦!', '', 0,
+        '', '', 0,
         (item.start + item.duration - zeroDate.getTime()) / SIZE_OF_WHOLE_DAY,
         leftTime / SIZE_OF_WHOLE_DAY
       ))

@@ -18,7 +18,14 @@
                 backgroundColor: item.backgroundColor, color: item.color }">
               <h4 v-if="item.height >= 0.0208 "> <!-- 小于三十分钟不预览 -->
                 <span>{{ item.startTime }} </span>
-                {{ item.title }}
+                  {{    (item.duration === 0)?item.title:
+                        (item.title.length > 4 && item.duration <= 45)? 
+                        item.title.substring(0, 4) + '...':
+                        (item.title.length <= 4)? item.title:
+                        (item.title.length <= 15 && item.duration > 45)?
+                        item.title: 
+                        item.title.substring(0, 15) + '...'
+                  }}
                 <span v-if="item.duration">
                   {{ '(' + item.duration + 'min)' }}
                 </span>
@@ -165,7 +172,7 @@ export default{
         cursor: pointer;
         h4 {
           font-weight: normal;
-          font-size: 0.25rem;
+          font-size: 12px;
         }
       }
 

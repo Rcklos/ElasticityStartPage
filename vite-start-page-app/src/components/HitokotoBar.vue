@@ -21,7 +21,7 @@ export default {
     api.hitokoto.get()
       .then(res => {
         that.hitokoto = res.data
-        console.log(res.data)
+        /*console.log(res.data)*/
       })
       .catch(err => console.error(err))
   }

@@ -45,7 +45,7 @@ const hreflink = computed(() => {
   return 'http://cn.bing.com/search?q=' + textInput.value
 })
 
-console.log(hreflink.value)
+/*console.log(hreflink.value)*/
 </script>
 
 <style lang="scss" scoped>
