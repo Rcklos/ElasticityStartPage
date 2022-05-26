@@ -35,7 +35,7 @@ const onInputBlur = () => {
   // 解决a标签点击无法跳转
   setTimeout(() => {
     isFocused.value = false
-  }, 500)
+  }, 100)
 }
 
 onMounted(() => {
@@ -94,7 +94,7 @@ const hreflink = computed(() => {
       border-radius: 30px;
       position: absolute;
       right: 17px;
-      top: 11px;
+      top: 12px;
       color: white;
       cursor: pointer;
       text-decoration: none;
