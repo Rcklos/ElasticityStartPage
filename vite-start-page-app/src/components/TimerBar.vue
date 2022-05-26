@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     updateTime() {
-      this.time = new Date().pattern('H:m:s')
+      this.time = new Date().pattern('HH:mm:ss')
     }
   },
   mounted() {
