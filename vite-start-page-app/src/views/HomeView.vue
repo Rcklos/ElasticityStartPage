@@ -2,10 +2,10 @@
   <div class="home" @contextmenu="menuClick">
     <div class="home-background"
       :style="{ backgroundImage: 'url(' + backgroundUrl + ')' }"></div>
-    <TimerBar />
+    <TimerBar class="alter-components" />
     <SearchBar />
-    <HitokotoBar />
-    <ScreenView ref="screen"/>
+    <HitokotoBar class="alter-components" />
+    <ScreenView class="alter-components" ref="screen"/>
   </div>
 </template>
 
@@ -45,6 +45,16 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
+@media only screen and (max-height: 400px) {
+  .alter-components {
+    display: none;
+  }
+  .home {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
 .home {
   height: 100%;
   &-background {
