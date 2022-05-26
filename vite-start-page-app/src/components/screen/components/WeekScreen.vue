@@ -88,7 +88,7 @@ export default{
       }
     },
     handleRemoveItemClick() {
-      console.log(this.previewItem)
+      /*console.log(this.previewItem)*/
       removeItemOfDay(this.previewItem.index, this.previewDay)
       this.dialogVisible = false
       this.refreshItems()
@@ -115,7 +115,7 @@ export default{
           dayItemList: dayItemList
         })
       }
-      console.log(that.weekItemList)
+      /*console.log(that.weekItemList)*/
     },
   },
   mounted() {

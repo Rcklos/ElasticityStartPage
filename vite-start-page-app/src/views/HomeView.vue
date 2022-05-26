@@ -5,7 +5,7 @@
     <TimerBar class="alter-components" />
     <SearchBar />
     <HitokotoBar class="alter-components" />
-    <ScreenView class="alter-components" ref="screen"/>
+    <ScreenView ref="screen"/>
   </div>
 </template>
 
