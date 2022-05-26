@@ -33,7 +33,7 @@ export default defineConfig(({ command, mode }) => {
       port: 6789,
       proxy: {
         '/cors': {
-          target: 'http://localhost:6543',
+          target: 'http://localhost:3456',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/cors/, '')
         }
